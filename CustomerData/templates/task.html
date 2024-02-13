@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM/Leads</title>
+    <style>
+        body {
+            height: 691px;
+            width: 600px;
+            background-image: linear-gradient(135deg, rgb(28, 211, 224), rgb(27, 24, 24));
+        }
+
+        * {
+
+            font-family: cursive;
+        }
+
+
+        nav {
+            width: 100%;
+            height: 75px;
+            line-height: 75px;
+            padding: 0 50px;
+            position: fixed;
+            background-image: linear-gradient(#121213, #111112);
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            z-index: 999;
+        }
+
+        nav .logo p {
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            position: fixed;
+            margin: 0;
+        }
+
+        h1 {
+            margin-top: 0px;
+            padding-left: 10px;
+
+        }
+
+        input {
+            padding: 10px;
+            margin-top: 10px;
+            background: whitesmoke;
+            border-radius: 14px 14px;
+            color: black;
+
+        }
+
+        #save {
+            background-color: #1052ec;
+        }
+
+        #save:hover {
+            cursor: pointer;
+        }
+
+        select {
+            padding: 10px;
+            margin-top: 10px;
+            background: whitesmoke;
+            border: 1px solid black;
+            border-radius: 14px 14px;
+            color: black;
+
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-top: 41px;
+            margin-left: 45px;
+            width: 442px;
+
+        }
+
+        /* border Animation*/
+
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        .rainbow {
+            position:absolute;
+            width: 546px;
+            height: 564px;
+            background: white;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            margin-left: 456px;
+            margin-top: 92px;
+
+            --border-size: 0.3rem;
+            border: var(--border-size) solid transparent;
+
+            /* Paint an image in the border */
+            border-image: conic-gradient(from var(--angle),
+                    #d53e33 0deg 90deg,
+                    #fbb300 90deg 180deg,
+                    #377af5 180deg 270deg,
+                    #07933d 270deg 360deg) 1 stretch;
+
+        }
+
+        @supports (background: paint(houdini)) {
+            @property --opacity {
+                syntax: "<number>";
+                initial-value: 0.5;
+                inherits: false;
+            }
+
+            @property --angle {
+                syntax: "<angle>";
+                initial-value: 0deg;
+                inherits: false;
+            }
+
+            @keyframes opacityChange {
+                to {
+                    --opacity: 1;
+                }
+            }
+
+            @keyframes rotate {
+                to {
+                    --angle: 360deg;
+                }
+            }
+
+            .rainbow {
+                animation: rotate 4s linear infinite, opacityChange 3s infinite alternate;
+            }
+
+
+        }
+        a{
+            color: #050505;
+            text-decoration: none;
+            border: 1px solid black;
+            border-radius: 7px;
+            background:white;
+            margin-left: 1300px;
+            padding: 10px;
+        
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <p>Customer Relationship Management</p>
+            <a href="{% url 'task_view' %}">Tasks_List</a>
+        </div>
+    </nav>
+    <div class="rainbow">
+        
+        <form method="POST">
+            {% csrf_token %}
+            {{ result }}
+            <br>
+            <br>
+            Task_Type: <select name="task_Type" id="task_Type" required>
+                <option value="metting">Metting</option>
+                <option value="Conference">Conference</option>
+                <option value="Seminar">Seminae</option>
+                <option value="Negotiation call">Negotiation Call</option>
+            </select>
+            Duration: <select name="durations" required>
+                <option value="Hrs">Hrs</option>
+                <option value="Days">Days</option>
+            </select>
+            Status: <select name="status" required>
+                <option value="open">Open</option>
+                <option value="pending">Pending</option>
+                <option value="Closed">Closed</option>
+            </select>
+        
+            Details<input type="text" name="details" id="details">
+            <input type="submit" id="save" value="Save">
+        </form>
+        
+    </div>
+
+
+</body>
+
+</html>

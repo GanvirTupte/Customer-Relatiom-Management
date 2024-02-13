@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Data</title>
+    <style>
+        *{
+            font-weight: bold;
+        }
+        body {
+            background-image: linear-gradient(35deg, rgb(28, 211, 224), rgb(27, 24, 24));
+           
+        }
+
+        nav {
+            width: 100%;
+            height: 75px;
+            line-height: 75px;
+            padding: 0 50px;
+            position: fixed;
+            background-image: linear-gradient(#121213, #111112);
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            z-index: 999;
+        }
+
+        nav .logo p {
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            position: fixed;
+            margin: 0;
+        }
+
+       
+
+        table {
+            width: 80%;
+            margin: 50px auto; 
+            border-collapse: collapse;
+        }
+       th{
+         background: rgb(16, 16, 15);
+         color:aliceblue;
+      
+         
+       }
+       tr{
+        background: white;
+       }
+        table, th, td {
+            border: 2px solid rgb(13, 12, 13);
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            
+        }
+        
+    a {
+        font-size: 22px;
+        margin-left: 797px;
+        text-transform: uppercase;
+        padding: 0px 10px;
+        color: white;
+        text-decoration: none;
+      }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <p>Customer Relationship Management <a href="/task_Create/">Back</a></p>
+        </div>
+    </nav>
+    <h1>Task</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Task Type</th>
+                <th>Durations</th>
+                <th>Status</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+                <tr>
+                    <td>{{ item.task_Type }}</td>
+                    <td>{{ item.durations }}</td>
+                    <td>{{ item.status }}</td>
+                    <td>{{ item.details }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

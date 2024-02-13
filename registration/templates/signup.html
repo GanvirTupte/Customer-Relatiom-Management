@@ -1,0 +1,381 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signup</title>
+  <link rel="stylesheet" href="sign_up.css" />
+  <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/*
+body {
+  
+  padding: 0 50px;
+  background:black;
+}*/
+body {
+
+  background-image: linear-gradient(135deg, rgb(28, 211, 224), rgb(27, 24, 24));
+}
+
+.container {
+ 
+  max-width: 600px;
+  width: 100%;
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 23px;
+  background: cyan;
+  margin:12px 0px 0px 419px;
+}
+
+.container .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: left;
+  color: black;
+}
+
+.container .title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 30px;
+}
+
+.container form {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+}
+
+.container form .user-details {
+  margin: 20px 0;
+}
+
+.user-details .input-box,
+.marital-box {
+  margin-bottom: 15px;
+}
+
+.user-details .input-box .details,
+.marital-box .details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.user-details .input-box input,
+.marital-box select.dd {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding-left: 15px;
+  font-size: 16px;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+
+
+form .button {
+  height: 45px;
+  margin: 40px 0;
+}
+
+form .button input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  background: rgb(23, 24, 26);
+  cursor: pointer;
+  margin-top:-16px;
+}
+/*
+form .button input:hover {
+  background: rgb(30, 30, 183);
+}*/
+
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .user-details .input-box {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  .container form .user-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .user-details::-webkit-scrollbar {
+    width: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  nav {
+    padding: 0px 10px;
+  }
+  nav ul {
+    float: none;
+    text-align: center;
+    margin-top: 10px;
+  }
+  nav li {
+    display: block;
+    margin-bottom: 10px;
+  }
+  form {
+    margin-top: 75px;
+  }
+}
+
+nav {
+  width: 100%;
+  height: 75px;
+  line-height: 75px;
+  padding: 0 50px;
+  background-image: linear-gradient(#121213, #111112);
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  z-index: 999;
+}
+nav .logo p {
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  margin: 0;
+}
+.accn{
+  color: red;
+  font-weight: bold;
+  margin-top: -25px;
+}
+#back{
+  font-size: 22px;
+  margin-left: 797px;
+  text-transform: uppercase;
+  padding: 0px 10px;
+  color: white;
+  text-decoration: none;
+}
+
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="logo">
+         <p>Customer Relationship Management <a id="back" href="/login/">Back</a></p>
+        
+    </div>
+  </nav>
+ 
+  <div class="container">
+    <div class="title">Sign Up Here</div>
+
+    <form action="/signup/" method="post"> <br>
+      {% csrf_token %}
+
+    {% if messages %}
+        <div>
+            {% for message in messages %}
+                <p>{{ message.message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+      <div>
+        <span class="details" style="color: red;">{{ result }}</span>
+      </div>
+
+      <div class="user-details">
+        <div class="input-box">
+          <span class="details">Name<span style="color: red"> *</span></span>
+          <input type="text" placeholder="Enter Your Name" name="name" id="name" required />
+        </div>
+
+        <div class="input-box">
+          <span class="details">Email<span style="color: red"> *</span></span>
+          <input type="email" placeholder="Enter your Email" name="email" id="email" required />
+        </div>
+
+        <div class="input-box">
+          <span class="details">Password<span style="color: red"> *</span></span>
+          <input type="password" placeholder="Enter Password" id="password1" name="password1" required />
+        </div>
+
+        <div class="input-box">
+          <span class="details">Confirm Password<span style="color: red"> *</span></span>
+          <input type="password" placeholder="Confirm password" id="password2" name="password2" required />
+        </div>
+
+   
+
+        <div class="marital-box">
+          <label for="marital-status" class="details">Security question<span style="color: red"> *</span></label>
+          <select name="security_question" id="security_question" class="dd" required>
+              <option value="" disabled selected>Select Security question</option>
+              <option value="Favourite colour">Favourite colour</option>
+              <option value="Favourite teacher">Favourite teacher</option>
+              <option value="Blood Group">Blood Group</option>
+              <option value="Pet name">Pet name</option>
+              <option value="Favourite fruit">Favourite fruit</option>
+              <option value="Favourite City">Favourite City</option>
+          </select>
+        </div>
+
+        <div class="input-box">
+          <span class="details">Answer<span style="color: red"> *</span></span>
+          <input type="text" placeholder="Answer" id="security_answer" name="security_answer" required />
+        </div>
+
+        <div class="input-box">
+            <span class="details">Contact<span style="color: red"> *</span></span>
+            <input type="text" placeholder="Enter Your Contact" name="contact" id="contact" required />
+        </div>
+
+        <div class="input-box">
+            <span class="details">DOB<span style="color: red"> *</span></span>
+            <input type="date" placeholder="Enter Your Date of birth" name="dob" id="dob" required />
+        </div>
+
+        <div class="input-box">
+            <span class="details">Address<span style="color: red"> *</span></span>
+            <input type="text" placeholder="Enter Your Address" name="address" id="address" required />
+        </div>
+
+        <div class="input-box">
+            <span class="details">Aadhaar<span style="color: red"> *</span></span>
+            <input type="text" placeholder="Enter Your Addhar Number" name="aadhaar" id="aadhaar" required />
+        </div>
+
+   
+
+        <div class="marital-box">
+          <label for="marital-status" class="details">Marital Status<span style="color: red"> *</span></label>
+          <select name="marital_status" id="marital_status" class="dd" required>
+              <option value="" disabled selected>Select Marital Status</option>
+              <option value="single">Single</option>
+              <option value="married">Married</option>
+              <option value="divorced">Divorced</option>
+              <option value="widowed">Widowed</option>
+          </select>
+      </div>
+
+        <div class="input-box">
+            <span class="details">spouse_name</span>
+            <input type="text" placeholder="Enter Your Spause Name" name="spouse_name" id="spouse_name" />
+        </div>
+
+ 
+        <div class="marital-box">
+          <label for="marital-status" class="details">Departmrnt<span style="color: red"> *</span></label>
+          <select name="department" id="department" class="dd" required>
+              <option value="" disabled selected>Select Department</option>
+              <option value="Accounts">Accounts</option>
+              <option value="HR">HR</option>
+              <option value="Developement">Developement</option>
+              <option value="Testing">Testing</option>
+          </select>
+      </div>
+
+        <div class="input-box">
+            <span class="details">Depart Manager<span style="color: red"> *</span></span>
+            <input type="text" placeholder="Select Your Dept Manager" name="dpt_manager" id="dpt_manager" required />
+        </div>
+
+     
+
+        <div class="marital-box">
+          <label for="marital-status" class="details">Qualification<span style="color: red"> *</span></label>
+          <select name="qualification" id="qualification" class="dd" required>
+              <option value="" disabled selected>Select Qualification</option>
+              <option value="Engineer">Engineer</option>
+              <option value="BSC">BSC</option>
+              <option value="BA">BA</option>
+              <option value="MBA">MBA</option>
+          </select>
+        </div>
+
+    
+        <div class="marital-box">
+          <label for="marital-status" class="details">Designation<span style="color: red"> *</span></label>
+          <select name="designation" id="designation" class="dd" required>
+              <option value="" disabled selected>Select Designation</option>
+              <option value="Developer">Developer</option>
+              <option value="Tester">Tester</option>
+              <option value="Manager">Manager</option>
+              <option value="BA">BA</option>
+              <option value="Analyst">Analyst</option>
+          </select>
+        </div>
+
+        <div class="input-box">
+            <span class="details">Grade Pay</span>
+            <input type="text" placeholder="Enter Your Grade Pay" name="grade_pay" id="grade_pay" />
+        </div>
+
+        <div class="input-box">
+            <span class="details">Basic Pay</span>
+            <input type="text" placeholder="Enter Your Basic Pay" name="basic_pay" id="basic_pay" />
+        </div>
+
+        <div class="input-box">
+            <span class="details">Taxation</span>
+            <input type="text" placeholder="Enter Your Taxation" name="taxation" id="taxation" />
+        </div>
+
+     
+
+        <div class="marital-box">
+          <label for="marital-status" class="details">Project<span style="color: red"> *</span></label>
+          <select name="project" id="project" class="dd" required>
+              <option value="" disabled selected>Select Designation</option>
+              <option value="CRM">CRM</option>
+              <option value="ERP">ERP</option>
+              <option value="IMS">IMS</option>
+              <option value="OMS">OMS</option>
+              <option value="WMS">WMS</option>
+              <option value="Ecommerce">Ecommerce</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="button">
+        <input type="submit" value="Click to Register" />
+      </div>
+
+      <a class="accn" href="{% url 'login' %}">Already i have an account</a>
+    </form>
+  </div>
+</body>
+
+</html>
